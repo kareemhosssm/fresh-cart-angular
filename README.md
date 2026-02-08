@@ -27,7 +27,7 @@ The application supports bilingual functionality (English & Arabic) and Dark/Lig
 ---
 
 ## Screenshots
-*(Add screenshots here if you have them, e.g., homepage, product page, cart page)*
+![Homepage](assets/screenshots/img1.png)
 
 ---
 
