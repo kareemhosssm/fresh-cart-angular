@@ -1,59 +1,37 @@
-# ECommerce
+# Fresh Cart E-Commerce
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.5.
+## Overview
+Fresh Cart is a responsive e-commerce web application built with **Angular**.  
+It allows users to browse products, manage a shopping cart, and complete purchases with **Stripe Payment Gateway**.  
+The application supports bilingual functionality (English & Arabic) and Dark/Light mode.
 
-## Development server
+---
 
-To start a local development server, run:
+## Features
+- Product listing with categories and detailed pages  
+- Shopping cart with quantity update and item removal  
+- Checkout flow with **Stripe integration** for secure payments  
+- RESTful API integration for products, orders, and user management  
+- Responsive design for desktop and mobile devices  
+- Bilingual support: English & Arabic  
+- Dark & Light mode toggle
 
+---
+
+## Technologies Used
+- **Front-End:** Angular, TypeScript, HTML5, CSS3, TailwindCSS  
+- **State Management:** RxJS  
+- **Payment Integration:** Stripe API  
+- **API:** RESTful API (Backend not included in this repo)  
+
+---
+
+## Screenshots
+*(Add screenshots here if you have them, e.g., homepage, product page, cart page)*
+
+---
+
+## Installation
+1. Clone the repository:
 ```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+git clone https://github.com/kareemhosssm/fresh-cart-angular.git
