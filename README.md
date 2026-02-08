@@ -27,7 +27,7 @@ The application supports bilingual functionality (English & Arabic) and Dark/Lig
 ---
 
 ## Screenshots
-![Homepage](assets/screenshots/img1.png)
+![Homepage](puplic/screenshot/img1.png)
 
 ---
 
