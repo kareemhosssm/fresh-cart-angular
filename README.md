@@ -9,12 +9,12 @@ The application supports bilingual functionality (English & Arabic) and Dark/Lig
 
 ## Features
 - Product listing with categories and detailed pages  
-- Shopping cart with quantity update and item removal  
+- Shopping cart with quantity updates and item removal  
 - Checkout flow with **Stripe integration** for secure payments  
 - RESTful API integration for products, orders, and user management  
 - Responsive design for desktop and mobile devices  
 - Bilingual support: English & Arabic  
-- Dark & Light mode toggle
+- Dark & Light mode toggle  
 
 ---
 
@@ -27,7 +27,33 @@ The application supports bilingual functionality (English & Arabic) and Dark/Lig
 ---
 
 ## Screenshots
-![Homepage](puplic/screenshot/img1.png)
+
+### Homepage
+![Homepage](public/screenshot/img1.png)
+
+### Product Listing
+![Product Listing](public/screenshot/img2.png)
+
+### Product Details
+![Product Details](public/screenshot/img3.png)
+
+### Cart Page
+![Cart Page](public/screenshot/img4.png)
+
+### Checkout
+![Checkout](public/screenshot/img5.png)
+
+### Dark Mode
+![Dark Mode](public/screenshot/img6.png)
+
+### Arabic Version
+![Arabic Version](public/screenshot/img7.png)
+
+### Custom Request / Chat
+![Custom Request](public/screenshot/img8.png)
+
+### Order Confirmation
+![Order Confirmation](public/screenshot/img9.png)
 
 ---
 
