@@ -1,0 +1,152 @@
+<nav class="bg-gray-100 border-gray-200 h-13 ">
+  <div
+    class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto px-3"
+  >
+    <a
+      routerLink="/home"
+      class="flex items-center space-x-2 rtl:space-x-reverse"
+    >
+      <img src="/images/freshcart-logo.svg" class="h-6" />
+    </a>
+
+    <button
+      data-collapse-toggle="navbar-default"
+      type="button"
+      class="inline-flex items-center p-1.5 w-9 h-9 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
+      aria-controls="navbar-default"
+      aria-expanded="false"
+    >
+      <svg
+        class="w-5 h-5"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 17 14"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M1 1h15M1 7h15M1 13h15"
+        />
+      </svg>
+    </button>
+
+    <div class="hidden flex-grow w-full md:flex md:w-auto" id="navbar-default">
+      @if(isLogin()){
+      <ul
+        class="capitalize flex flex-col p-2 md:p-0 mt-2 rounded-lg md:flex-row md:space-x-1 rtl:space-x-reverse md:mt-0"
+      >
+        <li>
+          <a
+            routerLink="/home"
+            routerLinkActive="bg-green-600 text-white"
+            class="block py-1 px-2 text-gray-700 rounded-sm"
+            >home</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/products"
+            routerLinkActive="bg-green-600 text-white"
+            class="block py-1 px-2 text-gray-700 rounded-sm"
+            >products</a
+          >
+        </li>
+        
+        <li>
+          <a
+            routerLink="/categories"
+            routerLinkActive="bg-green-600 text-white"
+            class="block py-1 px-2 text-gray-700 rounded-sm"
+            >categories</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/brands"
+            routerLinkActive="bg-green-600 text-white"
+            class="block py-1 px-2 text-gray-700 rounded-sm"
+            >brands</a
+          >
+        </li>
+      </ul>
+      }
+
+      <ul
+        class="items-center capitalize ms-auto flex flex-col p-2 md:p-0 mt-2 rounded-lg md:flex-row md:space-x-0 rtl:space-x-reverse md:mt-0"
+      >
+        <li>
+          <a href="#" class="block p-1.5 text-gray-700 rounded-sm">
+            <i class="fab fa-facebook"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="block p-1.5 text-gray-700 rounded-sm">
+            <i class="fab fa-tiktok"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="block p-1.5 text-gray-700 rounded-sm">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="block p-1.5 text-gray-700 rounded-sm">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="block p-1.5 text-gray-700 rounded-sm">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="block p-1.5 text-gray-700 rounded-sm">
+            <i class="fab fa-linkedin"></i>
+          </a>
+        </li>
+
+        @if(!isLogin()){
+        <li>
+          <a
+            routerLink="/login"
+            routerLinkActive="bg-green-600 text-white"
+            class="block py-1 px-2 text-gray-700 rounded-sm"
+            >login</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/register"
+            routerLinkActive="bg-green-600 text-white"
+            class="block py-1 px-2 text-gray-700 rounded-sm"
+            >register</a
+          >
+        </li>
+        }@else{
+          <li>
+          <a
+            routerLink="/cart"
+            routerLinkActive="text-green-600"
+            class="block text-2xl py-1 px-2 text-gray-700 rounded-sm"
+            ><i class="fas fa-cart-shopping"></i></a
+          >
+        </li>
+
+        <li>
+          <a
+            routerLink="/logOut"
+            routerLinkActive="bg-green-600 text-white"
+            role="button"
+            class="block py-1 px-2 text-gray-700 rounded-sm"
+            (click)="authService.logOut()"
+            >logOut</a
+          >
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>

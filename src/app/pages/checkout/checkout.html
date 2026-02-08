@@ -1,0 +1,52 @@
+<section class="main-sec w-1/2 mx-auto">
+    <h1 class="text-center text-green-600 text-3xl">CheckOut</h1>
+    <form [formGroup]="checkOutForm" (ngSubmit)="submitForm()">
+      <div class="mb-1">
+        <label
+        for="details"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+        >details</label
+      >
+      <textarea
+        formControlName="details"
+        id="details"
+        class="form-control"
+      ></textarea>
+      </div>
+
+      <div class="mb-1">
+        <label
+        for="phone"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+        >phone</label
+      >
+      <input
+        formControlName="phone"
+        id="phone"
+        type="tel"
+        class="form-control"
+      />
+      </div>
+
+      <div class="mb-1">
+        <label
+        for="city"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+        >city</label
+      >
+      <input
+        formControlName="city"
+        id="city"
+        type="text"
+        class="form-control"
+      />
+      </div>
+
+     <button [disabled]="checkOutForm.invalid" type="submit" class=" btn-main flex items-center gap-2">
+      <img src="/images/visa-payment.webp" alt="" class="w-12 h-12 object-contain" />
+        <span>Online Payment</span>
+      </button>
+
+      
+    </form>
+</section>
