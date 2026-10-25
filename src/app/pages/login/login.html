@@ -1,114 +1,98 @@
-<section class="w-1/2 mx-auto bg-gray-50 p-4 rounded border shadow">
-  <h1 class="text-3xl text-center text-green-600 font-light">Login Now</h1>
+<section class="mx-auto my-6 w-full max-w-xl rounded-lg border bg-gray-50 p-4 shadow sm:my-8 sm:p-6 md:p-8">
+  <h1 class="mb-6 text-center text-3xl font-light text-green-600">
+    Login Now
+  </h1>
 
   <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
-    
 
-    <div class="mb-1">
+    <!-- Email -->
+    <div class="mb-4">
       @let emailControl = loginForm.get('email');
-      <label
-        for="email"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
-        >email</label
-      >
-      <input
-        formControlName="email"
-        type="email"
-        id="email"
-        class="form-control"
-      />
+
+      <label for="email" class="mb-2 block text-sm font-medium text-gray-900">
+        Email
+      </label>
+
+      <input formControlName="email" type="email" id="email" autocomplete="email" class="form-control w-full" />
+
       @if (emailControl?.touched && emailControl?.errors) {
-      <div
-        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100"
-        role="alert"
-      >
-        <svg
-          class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
+      <div class="mt-2 flex rounded-lg bg-red-100 p-3 text-sm text-red-800 sm:p-4" role="alert">
+        <svg class="me-3 mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor" viewBox="0 0 20 20">
           <path
-            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
-          />
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
         </svg>
-        <span class="sr-only">Danger</span>
-        <div>
-          <ul class="mt-1.5 list-disc list-inside">
-            @if (emailControl?.errors?.['required']) {
-            <li>Email is required</li>
-            } @else if (emailControl?.errors?.['email']) {
-            <li>Enter valid Email</li>
-            }
-          </ul>
-        </div>
+
+        <ul class="list-inside list-disc">
+          @if (emailControl?.errors?.['required']) {
+          <li>Email is required</li>
+          } @else if (emailControl?.errors?.['email']) {
+          <li>Enter valid Email</li>
+          }
+        </ul>
       </div>
       }
     </div>
 
-    <div class="mb-1">
+    <!-- Password -->
+    <div class="mb-4">
       @let passwordControl = loginForm.get('password');
-      <label
-        for="password"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
-        >password</label
-      >
-      <input
-        formControlName="password"
-        type="password"
-        id="password"
-        class="form-control"
-      />
+
+      <label for="password" class="mb-2 block text-sm font-medium text-gray-900">
+        Password
+      </label>
+
+      <input formControlName="password" type="password" id="password" autocomplete="current-password"
+        class="form-control w-full" />
+
       @if (passwordControl?.touched && passwordControl?.errors) {
-      <div
-        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100"
-        role="alert"
-      >
-        <svg
-          class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
+      <div class="mt-2 flex rounded-lg bg-red-100 p-3 text-sm text-red-800 sm:p-4" role="alert">
+        <svg class="me-3 mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor" viewBox="0 0 20 20">
           <path
-            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
-          />
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5 9.51 9.51 0 0 0-9.5-9.5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
         </svg>
-        <span class="sr-only">Danger</span>
-        <div>
-          <ul class="mt-1.5 list-disc list-inside">
-            @if (passwordControl?.errors?.['required']) {
-            <li>Password is required</li>
-            } @else if (passwordControl?.errors?.['pattern']) {
-            <li>Enter valid Password</li>
-            }
-          </ul>
-        </div>
+
+        <ul class="list-inside list-disc">
+          @if (passwordControl?.errors?.['required']) {
+          <li>Password is required</li>
+          } @else if (passwordControl?.errors?.['pattern']) {
+          <li>Enter valid Password</li>
+          }
+        </ul>
       </div>
       }
     </div>
 
+    <!-- Actions -->
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <a routerLink="/forgot" class="text-sm text-blue-600 hover:underline">
+        Forgot Password?
+      </a>
 
-    <div class="d-flex align-items-center justify-content-end gap-4">
-      <a routerLink="/forgot" class="link-primary">ForgotPassword</a>
+      <button [disabled]="isLoading" type="submit" class="btn-main inline-flex items-center justify-center gap-2">
+        Login
 
-    <button [disabled]="isLoading" type="submit" class="btn-main">Login
-
-      @if (isLoading) {
-        <span><i class="fas fa-spin fa-spinner"></i></span>
-      }
-    </button>
-
+        @if (isLoading) {
+        <span>
+          <i class="fas fa-spin fa-spinner"></i>
+        </span>
+        }
+      </button>
     </div>
 
-
+    <!-- Error Message -->
     @if (msgError) {
-      <p class="bg-red-400 text-white py-4 px-2 border">{{msgError}}</p>
+    <p class="mt-4 break-words rounded border border-red-300 bg-red-100 px-3 py-3 text-sm text-red-800 sm:px-4">
+      {{ msgError }}
+    </p>
     }
+
+    <!-- Success Message -->
     @if (isSuccess) {
-      <p class="bg-green-400 text-white py-4 px-2 border">{{isSuccess}}</p>
+    <p class="mt-4 break-words rounded border border-green-300 bg-green-100 px-3 py-3 text-sm text-green-800 sm:px-4">
+      {{ isSuccess }}
+    </p>
     }
 
   </form>

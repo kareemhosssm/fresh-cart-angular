@@ -1,83 +1,104 @@
-<section>
-  <div class="grid md:grid-cols-[70%_minmax(0,1fr)]">
-    <div>
+<!-- Main Banner -->
+<section class="px-3 pt-4 sm:px-4 lg:px-6">
+  <div
+    class="mx-auto grid max-w-screen-2xl grid-cols-1 gap-3 overflow-hidden md:grid-cols-[minmax(0,7fr)_minmax(0,3fr)]">
+
+    <!-- Main Slider -->
+    <div class="min-w-0 overflow-hidden rounded-lg">
       <owl-carousel-o [options]="customMainSlider">
         <ng-template carouselSlide>
-          <img src="/images/img1.avif" class="w-full h-[300px]" alt="" />
+          <img src="/images/img1.avif" class="h-48 w-full object-cover sm:h-64 lg:h-[300px]"
+            alt="FreshCart featured offer" />
         </ng-template>
         <ng-template carouselSlide>
-          <img src="/images/img2.avif" class="w-full h-[300px]" alt="" />
+          <img src="/images/img2.avif" class="h-48 w-full object-cover sm:h-64 lg:h-[300px]"
+            alt="FreshCart featured offer" />
         </ng-template>
         <ng-template carouselSlide>
-          <img src="/images/img3.avif" class="w-full h-[300px]" alt="" />
+          <img src="/images/img3.avif" class="h-48 w-full object-cover sm:h-64 lg:h-[300px]"
+            alt="FreshCart featured offer" />
         </ng-template>
         <ng-template carouselSlide>
-          <img src="/images/img4.avif" class="w-full h-[300px]" alt="" />
+          <img src="/images/img4.avif" class="h-48 w-full object-cover sm:h-64 lg:h-[300px]"
+            alt="FreshCart featured offer" />
         </ng-template>
         <ng-template carouselSlide>
-          <img src="/images/img5.avif" class="w-full h-[300px]" alt="" />
+          <img src="/images/img5.avif" class="h-48 w-full object-cover sm:h-64 lg:h-[300px]"
+            alt="FreshCart featured offer" />
         </ng-template>
         <ng-template carouselSlide>
-          <img src="/images/img6.avif" class="w-full h-[300px]" alt="" />
+          <img src="/images/img6.avif" class="h-48 w-full object-cover sm:h-64 lg:h-[300px]"
+            alt="FreshCart featured offer" />
         </ng-template>
       </owl-carousel-o>
     </div>
-    <div>
-      <img src="/images/grocery-banner.png" class="w-full h-[150px]" alt="" />
-      <img
-        src="/images/grocery-banner-2.jpeg"
-        class="w-full h-[150px]"
-        alt=""
-      />
+
+    <!-- Side Banners -->
+    <div class="grid min-w-0 grid-cols-2 gap-3 md:grid-cols-1">
+      <img src="/images/grocery-banner.png"
+        class="h-32 w-full rounded-lg object-cover sm:h-40 md:h-[145px] lg:h-[147px]" alt="Grocery offers" />
+      <img src="/images/grocery-banner-2.jpeg"
+        class="h-32 w-full rounded-lg object-cover sm:h-40 md:h-[145px] lg:h-[147px]" alt="Fresh grocery offers" />
     </div>
+
   </div>
 </section>
 
-<section>
-  <h2 class="text-xl">Popular Category</h2>
+<!-- Popular Categories -->
+<section class="mx-auto max-w-screen-2xl px-3 py-6 sm:px-4 sm:py-8 lg:px-6">
+  <h2 class="mb-4 text-xl font-semibold sm:text-2xl">
+    Popular Categories
+  </h2>
+
   <owl-carousel-o [options]="customOptions">
     @for (cat of Categories; track cat._id) {
     <ng-template carouselSlide>
-      <div>
-        <img [src]="cat.image" class="w-full h-[250px]" alt="" />
-        <h3 class="text-green-600">{{ cat.name }}</h3>
+      <div class="px-1">
+        <div
+          class="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm transition-shadow hover:shadow-md">
+          <img [src]="cat.image" [alt]="cat.name" class="h-36 w-full object-cover sm:h-44 lg:h-52" />
+          <h3 class="px-2 py-3 text-center text-sm font-medium text-green-600 sm:text-base">
+            {{ cat.name }}
+          </h3>
+        </div>
       </div>
     </ng-template>
     }
   </owl-carousel-o>
 </section>
 
-<section>
-  <h2 class="text-4xl">Popular Products</h2>
+<!-- Popular Products -->
+<section class="mx-auto max-w-screen-2xl px-3 pb-8 sm:px-4 lg:px-6">
+  <h2 class="mb-4 text-2xl font-semibold sm:text-3xl lg:text-4xl">
+    Popular Products
+  </h2>
 
-  <input
-    [(ngModel)]="text"
-    type="search"
-    placeholder="Search By name..."
-    class="form-control w-50 mx-auto my-2"
-  />
+  <input [(ngModel)]="text" type="search" placeholder="Search by name..." aria-label="Search products by name"
+    class="form-control my-4 block w-full sm:mx-auto sm:max-w-md" />
 
-  <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-    @for (prod of products.slice(0.12) |search : text ; track prod.id) {
+  <div class="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-6">
+    @for (prod of products.slice(0, 12) | search : text; track prod.id) {
     <div
-      class="card border-2 border-green-400/50 rounded-md shadow overflow-hidden relative"
-    >
-      <div [routerLink]="['/details', prod.id]" class="cursor-pointer">
-        <div class="card-img">
-          <img
-            class="w-full h-[250px] object-contain"
-            [src]="prod.imageCover"
-            [alt]="prod.title"
-          />
+      class="card relative flex min-w-0 flex-col overflow-hidden rounded-lg border border-green-400/50 bg-white shadow-sm transition-shadow hover:shadow-md">
+
+      <div [routerLink]="['/details', prod.id]" class="flex h-full min-w-0 cursor-pointer flex-col">
+        <div class="flex h-36 items-center justify-center overflow-hidden p-2 sm:h-48 md:h-52 lg:h-56">
+          <img class="max-h-full w-full object-contain" [src]="prod.imageCover" [alt]="prod.title" loading="lazy" />
         </div>
-        <div class="card-body px-2 py-4">
-          <h4 class="text-green-500 text-xs">
+
+        <div class="flex flex-1 flex-col px-2 py-3 sm:px-3">
+          <h4 class="mb-1 text-xs font-medium text-green-600 sm:text-sm">
             {{ prod.category.name | sale }}
           </h4>
-          <h3 class="font-medium">{{ prod.title | termtext : 2 }}</h3>
-          <div class="flex justify-between items-center">
-            <span>{{ prod.price | currency : "GBP" }} </span>
-            <div class="flex items-center">
+
+          <h3 class="mb-3 text-sm font-medium leading-snug sm:text-base">
+            {{ prod.title | termtext : 2 }}
+          </h3>
+
+          <div class="mt-auto flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
+            <span>{{ prod.price | currency : "GBP" }}</span>
+
+            <div class="flex items-center gap-1">
               <i class="fas fa-star text-yellow-300"></i>
               <span class="text-gray-500">{{ prod.ratingsAverage }}</span>
             </div>
@@ -85,13 +106,14 @@
         </div>
       </div>
 
-      <button 
-      (click)="addToCart(prod.id)"
-      class="btn-main text-white py-2 px-10 border rounded">
-        Add To Cart
-      </button>
-    </div>
+      <div class="p-2 pt-0 sm:px-3 sm:pb-3">
+        <button (click)="addToCart(prod.id)"
+          class="btn-main w-full rounded border px-2 py-2 text-sm text-white sm:px-4">
+          Add To Cart
+        </button>
+      </div>
 
+    </div>
     }
   </div>
 </section>
