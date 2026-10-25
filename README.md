@@ -57,7 +57,7 @@ The application supports bilingual functionality (English & Arabic) and Dark/Lig
 1. Clone the repository:
 ```bash
 git clone https://github.com/kareemhosssm/fresh-cart-angular.git
- cd ak-grand-hotel
+ cd fresh-cart
 2. **Frontend Setup (Angular):**
   ```bash
    cd frontend
