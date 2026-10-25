@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "npx tailwindcss -i ./src/styles/tailwind.css -o ./src/styles/styles.css -w",
-    "build": "npx tailwindcss -i ./src/styles/tailwind.css -o ./src/styles/styles.css -m",
+    "build": "ng build",
     "build:ssr": "ng build && ng run E_Commerce:server",
     "serve:ssr:E_Commerce": "node dist/E_Commerce/server/server.mjs",
     "watch": "ng build --watch --configuration development",
