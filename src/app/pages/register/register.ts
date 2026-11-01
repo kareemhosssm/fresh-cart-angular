@@ -18,23 +18,37 @@ import { Router } from '@angular/router';
   styleUrl: './register.scss',
 })
 export class Register {
+  private readonly authService = inject(AuthService);
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly router = inject(Router);
 
- private readonly authService = inject(AuthService);
- private readonly formBuilder = inject(FormBuilder);
- private readonly router = inject(Router);
+  isLoading: boolean = false;
+  msgError: string = '';
+  isSuccess: string = '';
 
- isLoading: boolean = false;
- msgError: string = '';
- isSuccess :string = '';
-
-  RegisterForm: FormGroup = this.formBuilder.group({ 
-    name: [null, [Validators.minLength(3), Validators.maxLength(20), Validators.required]],
-    email: [null, [Validators.email, Validators.required]],
-    password: [null, [Validators.pattern(/^[A-Z]\w{7,}$/), Validators.required]],
-    rePassword: [null, Validators.required],
-    phone: [null, [Validators.pattern(/^01[0125][0-9]{8}$/), Validators.required]],
-  }, {validators: this.confirmPassword});
-
+  RegisterForm: FormGroup = this.formBuilder.group(
+    {
+      name: [
+        null,
+        [
+          Validators.minLength(3),
+          Validators.maxLength(20),
+          Validators.required,
+        ],
+      ],
+      email: [null, [Validators.email, Validators.required]],
+      password: [
+        null,
+        [Validators.pattern(/^[A-Z]\w{7,}$/), Validators.required],
+      ],
+      rePassword: [null, Validators.required],
+      phone: [
+        null,
+        [Validators.pattern(/^01[0125][0-9]{8}$/), Validators.required],
+      ],
+    },
+    { validators: this.confirmPassword },
+  );
 
   // RegisterForm: FormGroup = new FormGroup({
   //   name: new FormControl(null, [
@@ -47,9 +61,6 @@ export class Register {
   //   rePassword: new FormControl(null, Validators.required),
   //   phone: new FormControl(null, [Validators.pattern(/^01[0125][0-9]{8}$/), Validators.required]),
   // }, {validators: this.confirmPassword});
-  
-
-
 
   submitForm(): void {
     if (this.RegisterForm.valid) {
@@ -62,28 +73,26 @@ export class Register {
             setTimeout(() => {
               this.router.navigate(['/login']);
             }, 2000);
-            
+
             this.isSuccess = 'Registration successful! Please log in.';
-          } 
+          }
           this.isLoading = false;
         },
-        error: (err:HttpErrorResponse) => {
+        error: (err: HttpErrorResponse) => {
           console.error('Error:', err);
 
-         this.msgError= err.error.message
+          this.msgError = err.error.message;
           this.isLoading = false;
         },
       });
     } else {
       this.RegisterForm.markAllAsTouched();
     }
-
   }
 
-  confirmPassword(group:AbstractControl) {
+  confirmPassword(group: AbstractControl) {
     const password = group.get('password')?.value;
     const rePassword = group.get('rePassword')?.value;
     return password === rePassword ? null : { mismatch: true };
-
-}
+  }
 }

@@ -17,18 +17,19 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './login.scss',
 })
 export class Login {
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
-private readonly authService = inject(AuthService);
- private readonly router = inject(Router);
-
- isLoading: boolean = false;
- msgError: string = '';
- isSuccess :string = '';
+  isLoading: boolean = false;
+  msgError: string = '';
+  isSuccess: string = '';
 
   loginForm: FormGroup = new FormGroup({
-    
-    email: new FormControl(null , [Validators.email, Validators.required]),
-    password: new FormControl(null, [Validators.pattern(/^[A-Z]\w{7,}$/), Validators.required]),
+    email: new FormControl(null, [Validators.email, Validators.required]),
+    password: new FormControl(null, [
+      Validators.pattern(/^[A-Z]\w{7,}$/),
+      Validators.required,
+    ]),
   });
 
   submitForm(): void {
@@ -37,25 +38,25 @@ private readonly authService = inject(AuthService);
       this.authService.sendLoginForm(this.loginForm.value).subscribe({
         next: (res) => {
           console.log(res);
-           // Navigate to login page or show success message
+          // Navigate to login page or show success message
           if (res.message === 'success') {
             setTimeout(() => {
-               //1- save token in local storage
+              //1- save token in local storage
               localStorage.setItem('userToken', res.token);
               //2- decode token to get user data
-              this.authService.decodeUserToken(); 
+              this.authService.decodeUserToken();
               //navigate to home page
               this.router.navigate(['/home']);
             }, 1000);
-            
+
             this.isSuccess = 'Login successful! Redirecting...';
           }
           this.isLoading = false;
         },
-        error: (err:HttpErrorResponse) => {
+        error: (err: HttpErrorResponse) => {
           console.error('Error:', err);
 
-         this.msgError= err.error.message
+          this.msgError = err.error.message;
           this.isLoading = false;
         },
       });
@@ -63,6 +64,4 @@ private readonly authService = inject(AuthService);
       this.loginForm.markAllAsTouched();
     }
   }
-
-
 }

@@ -14,8 +14,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'login',
-        loadComponent: () =>
-          import('./pages/login/login').then((m) => m.Login),
+        loadComponent: () => import('./pages/login/login').then((m) => m.Login),
         title: 'Login',
       },
       {
@@ -27,7 +26,9 @@ export const routes: Routes = [
       {
         path: 'forgot',
         loadComponent: () =>
-          import('./shared/components/forgotpassword/forgotpassword').then((m) => m.Forgotpassword),
+          import('./shared/components/forgotpassword/forgotpassword').then(
+            (m) => m.Forgotpassword,
+          ),
         title: 'forgotpassword',
       },
     ],
@@ -36,31 +37,17 @@ export const routes: Routes = [
   {
     path: '',
     component: BlankLayout,
-    canActivate: [authGuard],
     children: [
       {
         path: 'home',
-        loadComponent: () =>
-          import('./pages/home/home').then((m) => m.Home),
+        loadComponent: () => import('./pages/home/home').then((m) => m.Home),
         title: 'Home',
-      },
-      {
-        path: 'cart',
-        loadComponent: () =>
-          import('./pages/cart/cart').then((m) => m.CartComponent),
-        title: 'Cart',
       },
       {
         path: 'products',
         loadComponent: () =>
           import('./pages/products/products').then((m) => m.Products),
         title: 'Products',
-      },
-      {
-        path: 'allorders',
-        loadComponent: () =>
-          import('./pages/allorders/allorders').then((m) => m.Allorders),
-        title: 'allorders',
       },
       {
         path: 'brands',
@@ -75,16 +62,31 @@ export const routes: Routes = [
         title: 'Categories',
       },
       {
-        path: 'checkout/:id',
-        loadComponent: () =>
-          import('./pages/checkout/checkout').then((m) => m.Checkout),
-        title: 'Checkout',
-      },
-      {
-        path:'details/:id',
+        path: 'details/:id',
         loadComponent: () =>
           import('./pages/details/details').then((m) => m.Details),
         title: 'Details',
+      },
+      {
+        path: 'cart',
+        loadComponent: () =>
+          import('./pages/cart/cart').then((m) => m.CartComponent),
+        canActivate: [authGuard],
+        title: 'Cart',
+      },
+      {
+        path: 'allorders',
+        loadComponent: () =>
+          import('./pages/allorders/allorders').then((m) => m.Allorders),
+        canActivate: [authGuard],
+        title: 'allorders',
+      },
+      {
+        path: 'checkout/:id',
+        loadComponent: () =>
+          import('./pages/checkout/checkout').then((m) => m.Checkout),
+        canActivate: [authGuard],
+        title: 'Checkout',
       },
       {
         path: '**',
