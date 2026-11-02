@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import {
-  AbstractControl,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
@@ -27,30 +26,54 @@ export class Login {
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.email, Validators.required]),
     password: new FormControl(null, [
-      Validators.pattern(/^[A-Z]\w{7,}$/),
+      Validators.pattern(/^(?=.*[a-z])(?=.*\d)[A-Z]\w{7,}$/),
       Validators.required,
     ]),
   });
 
+  get passwordValue(): string {
+    return String(this.loginForm.get('password')?.value ?? '');
+  }
+
+  get startsWithCapital(): boolean {
+    return /^[A-Z]/.test(this.passwordValue);
+  }
+
+  get hasMinLength(): boolean {
+    return this.passwordValue.length >= 8;
+  }
+
+  get hasLowerCase(): boolean {
+    return /[a-z]/.test(this.passwordValue);
+  }
+
+  get hasNumber(): boolean {
+    return /\d/.test(this.passwordValue);
+  }
+
   submitForm(): void {
     if (this.loginForm.valid) {
       this.isLoading = true;
+
       this.authService.sendLoginForm(this.loginForm.value).subscribe({
         next: (res) => {
           console.log(res);
-          // Navigate to login page or show success message
+
           if (res.message === 'success') {
             setTimeout(() => {
-              //1- save token in local storage
+              // 1- save token in local storage
               localStorage.setItem('userToken', res.token);
-              //2- decode token to get user data
+
+              // 2- decode token to get user data
               this.authService.decodeUserToken();
-              //navigate to home page
+
+              // navigate to home page
               this.router.navigate(['/home']);
             }, 1000);
 
             this.isSuccess = 'Login successful! Redirecting...';
           }
+
           this.isLoading = false;
         },
         error: (err: HttpErrorResponse) => {
