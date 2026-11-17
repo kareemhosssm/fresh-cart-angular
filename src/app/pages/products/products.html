@@ -1,1 +1,77 @@
-<p>products works!</p>
+<section class="mx-auto max-w-screen-2xl px-3 pb-8 pt-6 sm:px-4 lg:px-6">
+
+    <h2 class="mb-2 text-2xl font-semibold sm:text-3xl lg:text-4xl">
+        All Products
+    </h2>
+
+    <p class="mb-4 text-sm text-gray-500">
+        Explore our collection and find your favorite products.
+    </p>
+
+    <!-- Search -->
+    <input [(ngModel)]="text" type="search" placeholder="Search by name..." aria-label="Search products by name"
+        class="form-control my-4 block w-full sm:mx-auto sm:max-w-md" />
+
+    <!-- Products Grid -->
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-6">
+
+        @for (prod of products | search : text; track prod.id) {
+
+        <div
+            class="card relative flex min-w-0 flex-col overflow-hidden rounded-lg border border-green-400/50 bg-white shadow-sm transition-shadow hover:shadow-md">
+
+            <!-- Product Details -->
+            <div [routerLink]="['/details', prod.id]" class="flex h-full min-w-0 cursor-pointer flex-col">
+
+                <!-- Product Image -->
+                <div class="flex h-36 items-center justify-center overflow-hidden p-2 sm:h-48 md:h-52 lg:h-56">
+                    <img class="max-h-full w-full object-contain" [src]="prod.imageCover" [alt]="prod.title"
+                        loading="lazy" />
+                </div>
+
+                <!-- Product Info -->
+                <div class="flex flex-1 flex-col px-2 py-3 sm:px-3">
+
+                    <h4 class="mb-1 text-xs font-medium text-green-600 sm:text-sm">
+                        {{ prod.category.name | sale }}
+                    </h4>
+
+                    <h3 class="mb-3 text-sm font-medium leading-snug sm:text-base">
+                        {{ prod.title | termtext : 2 }}
+                    </h3>
+
+                    <div class="mt-auto flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
+
+                        <span>
+                            {{ prod.price | currency : "GBP" }}
+                        </span>
+
+                        <div class="flex items-center gap-1">
+                            <i class="fas fa-star text-yellow-300"></i>
+                            <span class="text-gray-500">
+                                {{ prod.ratingsAverage }}
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add To Cart -->
+            <div class="p-2 pt-0 sm:px-3 sm:pb-3">
+                <button (click)="addToCart(prod.id)"
+                    class="btn-main w-full rounded border px-2 py-2 text-sm text-white sm:px-4">
+                    Add To Cart
+                </button>
+            </div>
+
+        </div>
+
+        } @empty {
+        <div class="col-span-full py-12 text-center text-gray-500">
+            No products found.
+        </div>
+        }
+
+    </div>
+</section>

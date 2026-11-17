@@ -103,8 +103,17 @@
             } @else {
             <li>
               <a routerLink="/cart" routerLinkActive="text-green-600" aria-label="Shopping cart" (click)="closeMenu()"
-                class="block rounded-md px-3 py-2 text-xl text-gray-700 transition-colors hover:bg-green-100 md:px-2">
+                class="relative block rounded-md px-3 py-2 text-xl text-gray-700 transition-colors hover:bg-green-100 md:px-2">
+              
                 <i class="fas fa-cart-shopping"></i>
+              
+                @if (cartService.cartCount() > 0) {
+                <span
+                  class="absolute -top-0 -right-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-600 px-1 text-xs font-bold text-white">
+                  {{ cartService.cartCount() }}
+                </span>
+                }
+              
               </a>
             </li>
 

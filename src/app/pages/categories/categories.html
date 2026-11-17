@@ -1,1 +1,213 @@
-<p>categories works!</p>
+<section class="mx-auto max-w-screen-2xl px-3 pb-8 pt-6 sm:px-4 lg:px-6">
+
+    @if (!selectedCategory) {
+
+    <!-- Main Categories -->
+    <h2 class="mb-2 text-2xl font-semibold sm:text-3xl lg:text-4xl">
+        All Categories
+    </h2>
+
+    <p class="mb-6 text-sm text-gray-500">
+        Explore our categories and discover what you are looking for.
+    </p>
+
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+
+        @for (cat of Categories; track cat._id) {
+
+        <div (click)="selectCategory(cat)"
+            class="cursor-pointer overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-green-400 hover:shadow-md">
+
+            <div class="flex h-36 items-center justify-center overflow-hidden sm:h-44 lg:h-48">
+                <img [src]="cat.image" [alt]="cat.name" loading="lazy"
+                    class="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
+            </div>
+
+            <h3 class="px-2 py-3 text-center text-sm font-medium text-green-600 sm:text-base">
+                {{ cat.name }}
+            </h3>
+
+        </div>
+
+        } @empty {
+        <div class="col-span-full py-12 text-center text-gray-500">
+            No categories found.
+        </div>
+        }
+
+    </div>
+
+    } @else {
+
+    <!-- Category Header -->
+    <div class="mb-6">
+
+        <button (click)="backToCategories()"
+            class="mb-5 inline-flex items-center gap-2 rounded-lg border border-green-600 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-600 hover:text-white">
+
+            <i class="fas fa-arrow-left"></i>
+            Back to Categories
+
+        </button>
+
+        <h2 class="mb-2 text-2xl font-semibold sm:text-3xl lg:text-4xl">
+            {{ selectedCategory.name }}
+        </h2>
+
+        <p class="text-sm text-gray-500">
+            Explore the subcategories of {{ selectedCategory.name }}.
+        </p>
+
+    </div>
+
+    @if (!selectedSubCategory) {
+
+    <!-- Subcategories -->
+
+    @if (isLoadingSubCategories) {
+
+    <div class="py-12 text-center">
+        <i class="fas fa-spinner fa-spin text-3xl text-green-600"></i>
+        <p class="mt-3 text-gray-500">Loading subcategories...</p>
+    </div>
+
+    } @else {
+
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+
+        @for (subCat of subCategories; track subCat._id) {
+
+        <div (click)="selectSubCategory(subCat)"
+            class="flex min-h-28 cursor-pointer items-center justify-center rounded-lg border border-gray-100 bg-white p-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-green-400 hover:shadow-md">
+
+            <h3 class="text-sm font-medium text-green-600 sm:text-base">
+                {{ subCat.name }}
+            </h3>
+
+        </div>
+
+        } @empty {
+        <div class="col-span-full py-12 text-center text-gray-500">
+            No subcategories found for this category.
+        </div>
+        }
+
+    </div>
+
+    }
+
+    } @else {
+
+    <!-- Products Header -->
+
+    <div class="mb-6">
+
+        <button (click)="backToSubCategories()"
+            class="mb-5 inline-flex items-center gap-2 rounded-lg border border-green-600 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-600 hover:text-white">
+
+            <i class="fas fa-arrow-left"></i>
+            Back to Subcategories
+
+        </button>
+
+        <h2 class="mb-2 text-2xl font-semibold sm:text-3xl lg:text-4xl">
+            {{ selectedSubCategory.name }}
+        </h2>
+
+        <p class="text-sm text-gray-500">
+            Explore products in this subcategory.
+        </p>
+
+    </div>
+
+    <!-- Search -->
+
+    <input [(ngModel)]="text" type="search" placeholder="Search by name..." aria-label="Search products by name"
+        class="form-control my-4 block w-full sm:mx-auto sm:max-w-md" />
+
+    @if (isLoadingProducts) {
+
+    <div class="py-12 text-center">
+        <i class="fas fa-spinner fa-spin text-3xl text-green-600"></i>
+        <p class="mt-3 text-gray-500">Loading products...</p>
+    </div>
+
+    } @else {
+
+    <!-- Products Grid -->
+
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-6">
+
+        @for (prod of products | search : text; track prod.id) {
+
+        <div
+            class="card relative flex min-w-0 flex-col overflow-hidden rounded-lg border border-green-400/50 bg-white shadow-sm transition-shadow hover:shadow-md">
+
+            <!-- Product Details -->
+
+            <div [routerLink]="['/details', prod.id]" class="flex h-full min-w-0 cursor-pointer flex-col">
+
+                <!-- Product Image -->
+
+                <div class="flex h-36 items-center justify-center overflow-hidden p-2 sm:h-48 md:h-52 lg:h-56">
+                    <img class="max-h-full w-full object-contain" [src]="prod.imageCover" [alt]="prod.title"
+                        loading="lazy" />
+                </div>
+
+                <!-- Product Info -->
+
+                <div class="flex flex-1 flex-col px-2 py-3 sm:px-3">
+
+                    <h4 class="mb-1 text-xs font-medium text-green-600 sm:text-sm">
+                        {{ prod.category.name | sale }}
+                    </h4>
+
+                    <h3 class="mb-3 text-sm font-medium leading-snug sm:text-base">
+                        {{ prod.title | termtext : 2 }}
+                    </h3>
+
+                    <div class="mt-auto flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
+
+                        <span>
+                            {{ prod.price | currency : "GBP" }}
+                        </span>
+
+                        <div class="flex items-center gap-1">
+                            <i class="fas fa-star text-yellow-300"></i>
+                            <span class="text-gray-500">
+                                {{ prod.ratingsAverage }}
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Add To Cart -->
+
+            <div class="p-2 pt-0 sm:px-3 sm:pb-3">
+                <button (click)="addToCart(prod.id)"
+                    class="btn-main w-full rounded border px-2 py-2 text-sm text-white sm:px-4">
+                    Add To Cart
+                </button>
+            </div>
+
+        </div>
+
+        } @empty {
+        <div class="col-span-full py-12 text-center text-gray-500">
+            No products found.
+        </div>
+        }
+
+    </div>
+
+    }
+
+    }
+
+    }
+
+</section>
